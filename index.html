@@ -1,0 +1,46 @@
+<html>
+    <head>
+            <meta charset="UTF-8"> 
+    </head>
+    <body>
+        <div id="inputs">
+            <h2>Reference price</h2>
+            <textarea id="ref-price" name="ref-price">1.2</textarea>
+            <h2>Your store price</h2>
+            <textarea id="your-price" name="your-price">1.3</textarea>            
+            <h2>Amount to exchange</h2>
+            <textarea id="amount" name="amount">1000</textarea>            
+        </div>
+        <div>
+            <h3>Result: you lose </h3>
+            <h3 id="res"></h3>
+        </div>
+
+        <script>
+            const roundTo2DecimalPoints = (num) => Math.round(num * 100) / 100;
+            const val = (el) => Number(el.value);
+
+            const resText = document.getElementById('res');
+            
+            const refPrice  = document.getElementById('ref-price');
+            const yourPrice = document.getElementById('your-price');
+            const amount    = document.getElementById('amount');
+            
+            function showMoneyLoss() {
+                const rp = val(refPrice);
+                const yp = val(yourPrice);
+                const a  = val(amount);
+
+                console.log(rp, yp, a);
+                let res = a/rp - a/yp;
+                resText.innerHTML = roundTo2DecimalPoints(res);
+            }
+
+            refPrice.onchange = showMoneyLoss;
+            yourPrice.onchange = showMoneyLoss;
+            amount.onchange = showMoneyLoss;
+                        
+            showMoneyLoss();
+        </script>
+    </body>
+</html>
